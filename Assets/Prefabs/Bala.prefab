@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 833784993274590214}
   m_Layer: 0
   m_Name: Bala
-  m_TagString: Untagged
+  m_TagString: Bala
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,3 +146,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebfe742e23aa2fc419593919db652fca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 20
+  lifeTime: 2

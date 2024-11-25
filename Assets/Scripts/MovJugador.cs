@@ -4,36 +4,27 @@ using UnityEngine;
 
 public class MovJugador : MonoBehaviour
 {
-    public float velocidad = 5f;
-    public float sensibilidadMouse = 100f;
-    private float xRotation = 0f;
-
-    private Rigidbody rb;
-
-    private void Start()
+    public float playerSpeed = 2.0f;
+    Rigidbody rb;
+    void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
-
-    private void Update()
+    void Update()
     {
-        // Movimiento con WASD
-        float moveX = Input.GetAxis("Horizontal");
-        float moveZ = Input.GetAxis("Vertical");
-
-        Vector3 move = transform.right * moveX + transform.forward * moveZ;
-        rb.MovePosition(rb.position + move * velocidad * Time.deltaTime);
-
-        // Rotación del jugador y la cámara con el mouse
-        float mouseX = Input.GetAxis("Mouse X") * sensibilidadMouse * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * sensibilidadMouse * Time.deltaTime;
-
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -120f, 120f);
-
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        transform.Rotate(Vector3.up * mouseX);
+        // Obtener la entrada de movimiento (Horizontal y Vertical)
+        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        // Convertir el movimiento en relación con la rotación del jugador (espacio local)
+        Vector3 moveRelative = transform.TransformDirection(move) * playerSpeed * Time.deltaTime;
+        // Mover el jugador usando MovePosition para evitar acumulación de fuerzas
+        rb.MovePosition(rb.position + moveRelative);
+        // Desbloquear el cursor cuando se presiona Escape
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
+
 }

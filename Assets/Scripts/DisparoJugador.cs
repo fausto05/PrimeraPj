@@ -4,22 +4,29 @@ using UnityEngine;
 
 public class NewBehaviourScript : MonoBehaviour
 {
-    public GameObject proyectilPrefab;
-    public Transform shootPoint;
-    public float shootForce = 20f;
+    public GameObject projectilePrefab; // Prefab del proyectil
+    public Transform firePoint;         // Punto desde donde se disparan las balas
+    public float projectileSpeed = 20f; // Velocidad del proyectil
 
-    private void Update()
+    void Update()
     {
+        // Disparar cuando se presiona el botón izquierdo del mouse
         if (Input.GetButtonDown("Fire1"))
         {
             Shoot();
         }
     }
-
-    private void Shoot()
+    void Shoot()
     {
-        GameObject projectile = Instantiate(proyectilPrefab, shootPoint.position, shootPoint.rotation);
+        // Instanciar el proyectil en la posición y rotación del firePoint
+        GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        // Añadir fuerza al proyectil
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
-        rb.AddForce(shootPoint.forward * shootForce, ForceMode.Impulse);
+        if (rb != null)
+        {
+            rb.velocity = firePoint.forward * projectileSpeed;
+        }
+        // Destruir el proyectil después de un tiempo para optimizar el rendimiento
+        Destroy(projectile, 3f);
     }
 }

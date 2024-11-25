@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7277518260716251897}
   - component: {fileID: 887183277015711294}
   - component: {fileID: 9142271253605784708}
+  - component: {fileID: 469991891572037069}
   m_Layer: 0
   m_Name: Enemigo
   m_TagString: Enemigo
@@ -107,3 +108,16 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &469991891572037069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8906158936143775191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90ac3667719141141aa3fd4b51762081, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
